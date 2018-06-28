@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import {register} from "../actions/auth";
 
 
+import eye from '../assets/images/eye-icon.png';
 import lockActive from '../assets/images/lock-active.png';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 
-class RegisterPayment extends Component {
+class Register extends Component {
 
 
     constructor(props) {
@@ -46,7 +47,7 @@ class RegisterPayment extends Component {
 
                 <div className="row">
 
-                    <div className="col-sm-7 p-0">
+                    <div className="col-sm-6 p-0">
 
                         <div className="inner-wrapper">
 
@@ -70,7 +71,7 @@ class RegisterPayment extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 h-75">
+                            <div className="col-sm-12 h-100">
 
                                 <div className="center-img">
 
@@ -84,7 +85,7 @@ class RegisterPayment extends Component {
 
                     </div>
 
-                    <div className="col-sm-5">
+                    <div className="col-sm-6">
 
                         <div className="login-wrapper">
 
@@ -109,26 +110,20 @@ class RegisterPayment extends Component {
                                 <label>Get started with Beacon</label>
 
                                 <div className="col-sm-12 form-group last-step-header">
-
                                   <p>1. Create an account</p>
-
-                                  <p> <i className="material-icons">done</i><span>Done</span></p>
-
+                                  <p> <i class="material-icons">done</i><span>Done</span></p>
                                 </div>
 
                                 <form className="mt-5 mb-4">
                                   
                                     <div className="headline">
-
                                          <p>2. Payment <img src={lockActive} /></p>
-
                                          <p> Sign up and proceed to payment</p>
-
                                     </div>
 
-                                    <div className="col-sm-12 form-group">
+                                    <div className="col-sm-12 form-group mt-3">
 
-                                        <input ref="name" type="text" placeholder="Full name" className="form-control" />
+                                        <input ref="email" type="text" placeholder="Full name" className="form-control" />
 
                                     </div>
 
@@ -161,7 +156,7 @@ class RegisterPayment extends Component {
 
                                     <div className="col-sm-12 form-group text-right">
 
-                                        <a className="form-link-text">Enter a discount coupon</a>
+                                        <a class="form-link-text">Enter a discount coupon</a>
 
                                     </div>
 
@@ -212,11 +207,11 @@ class RegisterPayment extends Component {
 }
 
 
-RegisterPayment.contextTypes = {
+Register.contextTypes = {
     store: PropTypes.object.isRequired
 };
 
-RegisterPayment.propTypes = {
+Register.propTypes = {
     user: PropTypes.string,
     registerError: PropTypes.object,
     dispatch: PropTypes.func.isRequired
@@ -232,4 +227,4 @@ function mapStateToProps(state) {
     return {user: null};
 }
 
-export default connect(mapStateToProps)(RegisterPayment);
+export default connect(mapStateToProps)(Register);

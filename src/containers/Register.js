@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import {register} from "../actions/auth";
 
 
+import eye from '../assets/images/eye-icon.png';
+import lock from '../assets/images/lock.png';
+import sale from '../assets/images/sale-banner.png';
 
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -72,6 +75,43 @@ class Register extends Component {
 
                             </div>
 
+                            <div className="col-sm-12">
+
+                                <div className="billing-section">
+
+                                    <label>Choose a billing cycle</label>
+                                    <div className="d-flex plan-action">
+
+                                      <span className="plan-name"> <img src={sale} className="sale-img" />Yearly</span>
+                                      <span>
+                                        <label className="switch">
+                                          <input type="checkbox" />
+                                          <span className="slider round"></span>
+                                        </label>
+                                      </span>
+                                      <span className="plan-name"> Monthly </span>
+                                    </div>
+                                    <div className="details-container">
+                                      <p className="head-title">Monthly</p>
+                                      <p className="form-link-text">
+                                        Document your user interviews faster  and get more from  your research over time.
+                                      </p>
+                                      <ul className="points-list">
+                                        <li><i class="material-icons">done</i> <span>Tag important moments live , during user interviews</span></li>
+                                        <li><i class="material-icons">done</i> <span> Synthesize your researchacross Google docs</span></li>
+                                        <li><i class="material-icons">done</i> <span> Documents user insights quickly and efficiently </span></li>
+                                      </ul>
+                                      <div className="price-container">
+                                        <div className="value">
+                                            <span>$<label>13</label>*</span>
+                                            <span>/MO</span>
+                                        </div>
+                                        <div className="discount">
+                                            Save 24 $ a year
+                                        </div>
+                                    </div>
+                                    </div>
+
                             <div className="col-sm-12 h-75">
 
                                 <div className="center-img">
@@ -113,6 +153,9 @@ class Register extends Component {
                                 <form onSubmit={this.saveUser} className="mt-5">
 
                                     <p>1. Create an account</p>
+                                <form className="mt-5">
+
+                                    <p>1. Create an account</p>
 
                                     <div className="col-sm-12 form-group">
 
@@ -134,12 +177,15 @@ class Register extends Component {
 
                                                 <div className="input-group-append">
 
-                                                    <span onClick={this.changePasswordVisibility}
-                                                          className="input-group-text">
+                                                    <span className="input-group-text">
 
                                                     <Icon> {!this.state.password_visibility ? `visibility_off` : `visibility`}</Icon>
 
                                                 </span>
+
+                                                        <img src={eye} />
+
+                                                    </span>
 
                                                 </div>
 
@@ -147,15 +193,9 @@ class Register extends Component {
 
                                     </div>
 
-                                    <div className="col-sm-12 form-group">
+                                    <div className="col-sm-12 form-group text-right">
 
-                                        <label className="checkbox-wrap"> I agree to the Terms of Service and Privacy Policy
-
-                                            <input type="checkbox" />
-
-                                                <span className="checkmark" > </span>
-
-                                        </label>
+                                        <a class="form-link-text">Enter a discount coupon</a>
 
                                     </div>
 
@@ -166,6 +206,14 @@ class Register extends Component {
                                     </div>
 
                                 </form>
+
+                                <div className="col-lg-12 next-step-bar mt-5">
+
+                                    <label>2. Payment <img src={lock} /></label>
+
+                                    <p>Sign up and proceed to payment</p>
+
+                                </div>
 
                             </div>
 
@@ -187,7 +235,7 @@ class Register extends Component {
 
         if (!this.refs.name.value || !this.refs.email.value || !this.refs.password.value) {
             this.setState({
-                registerError: "PLease enter valid Input"
+                registerError: "PLease enter valid Inpit"
             });
             return false;
         }
