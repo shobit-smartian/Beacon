@@ -130,6 +130,10 @@ class Register extends Component {
 
                             <div className="col-sm-12 center-form register-form">
 
+                                <div className="error-msg ">
+                                  <i class="material-icons">clear</i> <span> An account with this email already exists, Sign in or choose another email. </span>
+                                </div>
+
                                 {
                                     registerError &&
 
@@ -139,7 +143,7 @@ class Register extends Component {
 
                                     </div>
                                 }
-
+                                
                                 <label>Get started with Beacon</label>
 
                                 <form className="mt-5">
