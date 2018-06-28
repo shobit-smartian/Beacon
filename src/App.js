@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 import Docs from "./containers/Docs";
+import RegisterPayment from "./containers/RegisterPayment";
 import Register from "./containers/Register";
 import NotFound from "./containers/misc/NotFound";
 
@@ -28,12 +29,14 @@ import "./app.css";
 import Record from "./containers/Record";
 
 
+
 class App extends Component {
 
 
     render() {
 
         const {user} = this.props;
+        console.log('-------->>', user)
         const isAuthenticated = user && true;
 
         return (
@@ -53,6 +56,8 @@ class App extends Component {
                             <Switch>
 
                                 <Route path="/register" component={Register}/>
+
+                                <Route path="/register_payment" component={RegisterPayment}/>
 
                                 <Route exact path="/login" component={Login}/>
 

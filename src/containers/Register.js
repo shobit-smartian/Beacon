@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import {register} from "../actions/auth";
 
 
-import eye from '../assets/images/eye-icon.png';
-import lockActive from '../assets/images/lock-active.png';
+
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {Icon} from "@material-ui/core/es/index";
 
 
 class Register extends Component {
@@ -23,6 +23,7 @@ class Register extends Component {
 
 
     componentWillReceiveProps(nextProps) {
+
         if (nextProps.user) {
             // logged in, let's show redirect if any, or show home
             try {
@@ -47,7 +48,7 @@ class Register extends Component {
 
                 <div className="row">
 
-                    <div className="col-sm-6 p-0">
+                    <div className="col-sm-7 p-0">
 
                         <div className="inner-wrapper">
 
@@ -71,7 +72,7 @@ class Register extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 h-100">
+                            <div className="col-sm-12 h-75">
 
                                 <div className="center-img">
 
@@ -85,7 +86,7 @@ class Register extends Component {
 
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-5">
 
                         <div className="login-wrapper">
 
@@ -95,7 +96,7 @@ class Register extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 center-form register-payment">
+                            <div className="col-sm-12 center-form register-form">
 
                                 {
                                     registerError &&
@@ -109,21 +110,19 @@ class Register extends Component {
 
                                 <label>Get started with Beacon</label>
 
-                                <div className="col-sm-12 form-group last-step-header">
-                                  <p>1. Create an account</p>
-                                  <p> <i class="material-icons">done</i><span>Done</span></p>
-                                </div>
+                                <form onSubmit={this.saveUser} className="mt-5">
 
-                                <form className="mt-5 mb-4">
-                                  
-                                    <div className="headline">
-                                         <p>2. Payment <img src={lockActive} /></p>
-                                         <p> Sign up and proceed to payment</p>
+                                    <p>1. Create an account</p>
+
+                                    <div className="col-sm-12 form-group">
+
+                                        <input ref="name" type="text" placeholder="Full name" className="form-control" />
+
                                     </div>
 
                                     <div className="col-sm-12 form-group">
 
-                                        <input ref="email" type="text" placeholder="Full name" className="form-control" />
+                                        <input ref="email" type="text" placeholder="Your work email" className="form-control" />
 
                                     </div>
 
@@ -131,22 +130,16 @@ class Register extends Component {
 
                                         <div className="input-group">
 
-
-                                            <input ref="password" type="password" className="form-control" placeholder="Credit card number" />
+                                            <input ref="password" type="password" className="form-control" placeholder="Password" />
 
                                                 <div className="input-group-append">
 
-                                                    <span className="input-group-text">
+                                                    <span onClick={this.changePasswordVisibility}
+                                                          className="input-group-text">
 
-                                                        MM / YY 
+                                                    <Icon> {!this.state.password_visibility ? `visibility_off` : `visibility`}</Icon>
 
-                                                    </span>
-
-                                                    <span className="input-group-text">
-
-                                                        CVC
-
-                                                    </span>
+                                                </span>
 
                                                 </div>
 
@@ -154,15 +147,21 @@ class Register extends Component {
 
                                     </div>
 
-                                    <div className="col-sm-12 form-group text-right">
+                                    <div className="col-sm-12 form-group">
 
-                                        <a class="form-link-text">Enter a discount coupon</a>
+                                        <label className="checkbox-wrap"> I agree to the Terms of Service and Privacy Policy
+
+                                            <input type="checkbox" />
+
+                                                <span className="checkmark" > </span>
+
+                                        </label>
 
                                     </div>
 
                                     <div className="col-sm-12 form-group">
 
-                                        <button onClick={this.saveUser} className="btn primary-btn">Pay $ 13 USD</button>
+                                        <button type="submit" className="btn primary-btn">Continue</button>
 
                                     </div>
 
@@ -188,7 +187,7 @@ class Register extends Component {
 
         if (!this.refs.name.value || !this.refs.email.value || !this.refs.password.value) {
             this.setState({
-                registerError: "PLease enter valid Inpit"
+                registerError: "PLease enter valid Input"
             });
             return false;
         }
@@ -204,6 +203,17 @@ class Register extends Component {
         this.refs.name.value = this.refs.email.value = this.refs.password.value = '';
 
     }
+
+
+    changePasswordVisibility = () => {
+
+        this.setState({
+            password_visibility: !this.state.password_visibility
+        });
+        this.refs.password.setAttribute('type', (!this.state.password_visibility ? `text` : `password`))
+    }
+
+
 }
 
 
