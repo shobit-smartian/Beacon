@@ -75,7 +75,7 @@ export default class RecordStep1 extends Component {
 
                         <div className="card-footer">
 
-                            <Link to='records/step_two'> Skip this step </Link>
+                            <Link to='/records/step_two'> Skip this step </Link>
 
                         </div>
 
