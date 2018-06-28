@@ -14,9 +14,9 @@ injectTapEventPlugin();
 class Header extends Component {
 
 
-    onLogoutClick = event => {
-        event.preventDefault();
-        this.props.handleLogout();
+    onLogoutClick = () => {
+
+        localStorage.removeItem('id_token')
         this.props.history.replace("/login");
     };
 
@@ -31,7 +31,7 @@ class Header extends Component {
 
             !isLoginPage && !isRegisterPage &&
 
-            <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
 
                 <div className="navbar-brand">
 
@@ -76,6 +76,10 @@ class Header extends Component {
 
                             <i className="fa fa-angle-down"> </i>
 
+                        </li>
+
+                        <li>
+                            <button onClick={this.onLogoutClick} className="btn btn-danger"> Logout </button>
                         </li>
 
                     </ul>

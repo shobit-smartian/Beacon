@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // would require configuring the server. So we will use HashRouter here.
 // Please change to BrowserRouter if you have your own backend server.
 ///////////////////////////////////////////////////////////////////////////
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
 
 import {connect} from "react-redux";
 import Header from "./components/Header";
@@ -17,16 +17,15 @@ import Footer from "./components/Footer";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 import Docs from "./containers/Docs";
+import Record from "./containers/Record";
 import RegisterPayment from "./containers/RegisterPayment";
 import Register from "./containers/Register";
 import NotFound from "./containers/misc/NotFound";
 
 import PrivateRoute from "./containers/misc/PrivateRoute";
 
-import {logout} from "./actions/auth";
 
 import "./app.css";
-import Record from "./containers/Record";
 
 
 
@@ -35,23 +34,21 @@ class App extends Component {
 
     render() {
 
-        const {user} = this.props;
-        console.log('-------->>', user)
-        const isAuthenticated = user && true;
+        const isAuthenticated = localStorage.getItem('id_token') && true;
 
         return (
 
-            <Router>
+            <BrowserRouter>
 
                 <div>
 
-                    <Header user={user} handleLogout={() => this.handleLogout()}/>
+                    <Header handleLogout={() => this.handleLogout()}/>
 
                     <div className="appContent">
 
                         <div className="main-container collapse-sidebar">
 
-                            <Sidebar user={user} />
+                            <Sidebar />
 
                             <Switch>
 
@@ -63,7 +60,7 @@ class App extends Component {
 
                                 <PrivateRoute isAuthenticated={isAuthenticated}  path="/" component={Home} />
 
-                                <PrivateRoute isAuthenticated={isAuthenticated} path="/records" component={Record}/>
+                                <PrivateRoute isAuthenticated={isAuthenticated} path="/records/:component_name" component={Record}/>
 
                                 <PrivateRoute isAuthenticated={isAuthenticated} path="/docs/:id" component={Docs}/>
 
@@ -75,17 +72,18 @@ class App extends Component {
 
                     </div>
 
-                    <Footer user={user} />
+                    <Footer />
 
                 </div>
 
-            </Router>
+            </BrowserRouter>
         );
     }
 
-    handleLogout() {
-        const {user} = this.props;
-        this.props.dispatch(logout(user));
+    handleLogout = () => {
+        // const {user} = this.props;
+        // this.props.dispatch(logout(user));
+        localStorage.removeItem('id_token');
     }
 }
 

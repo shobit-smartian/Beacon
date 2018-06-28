@@ -22,7 +22,6 @@ const initialState = {
 
 function initializeState() {
     const userProfile = loadUserProfile();
-    console.log(userProfile)
     return Object.assign({}, initialState, userProfile);
 }
 

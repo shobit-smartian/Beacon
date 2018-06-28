@@ -32,7 +32,7 @@ class Footer extends Component {
 
 Footer.propTypes = {
     user: PropTypes.string,
-    handleLogout: PropTypes.func.isRequired
+    // handleLogout: PropTypes.func.isRequired
 };
 
 export default withRouter(Footer);

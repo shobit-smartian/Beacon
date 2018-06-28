@@ -42,7 +42,7 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
     user: PropTypes.string,
-    handleLogout: PropTypes.func.isRequired
+    // handleLogout: PropTypes.func.isRequired
 };
 
 export default withRouter(Sidebar);

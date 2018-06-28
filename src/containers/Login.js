@@ -6,8 +6,11 @@ import {login} from "../actions/auth";
 import "./_styles/login_register.scss";
 
 
-import eye from '../assets/images/eye-icon.png';
 import {Link} from "react-router-dom";
+
+
+// material components
+import {Icon} from "@material-ui/core/es/index";
 
 
 class Login extends Component {
@@ -15,12 +18,20 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
+
+        this.state = {
+            password_visibility: false
+        }
+    }
+
+
+    componentDidMount() {
+
+        this.handleLogout()
     }
 
 
     componentWillReceiveProps(nextProps) {
-
-        console.log('login props kdfhasdjkhadlfd;gjkl', nextProps)
 
         if (nextProps.user) {
             // logged in, let's show redirect if any, or show home
@@ -46,7 +57,7 @@ class Login extends Component {
 
                 <div className="row">
 
-                    <div className="col-sm-6 p-0">
+                    <div className="col-sm-7 p-0">
 
                         <div className="inner-wrapper">
 
@@ -75,7 +86,7 @@ class Login extends Component {
 
                             <div className="center-img">
 
-                                    Image TBD
+                                Image TBD
 
                             </div>
 
@@ -84,48 +95,35 @@ class Login extends Component {
 
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-5">
 
                         <div className="login-wrapper">
-
-                            <div className="col-sm-12 text-right">
-
-                                <a className="btn signin-btn">Sign in</a>
-
-                            </div>
 
                             <div className="col-sm-12 center-form">
 
                                 {
                                     !user && loginError &&
 
-                                    <div className="alert alert-danger">
+                                    <div className="error-msg ">
 
-                                        {loginError.message}. Hint: use admin/password to log in.
+                                        <i className="material-icons">clear</i> <span> Please provide valid input. </span>
 
                                     </div>
                                 }
 
                                 <label>Welcome to Beacon</label>
 
-                                <form className="mt-5 mb-4">
+                                <form onSubmit={this.handleLogin} className="mt-5 mb-4">
 
                                     <div className="col-sm-12 form-group">
 
                                         <input
                                             ref="username"
-                                            type="text"
+                                            type="email"
                                             placeholder="Your work email"
-                                            required
                                             className="form-control"
                                         />
 
-                                    </div>
-
-                                    <div className="col-sm-12 form-group">
-                                     <p className="error-msg text-left">
-                                       Please enter valid email
-                                     </p>
                                     </div>
 
                                     <div className="col-sm-12 form-group">
@@ -136,17 +134,15 @@ class Login extends Component {
                                                 type="password"
                                                 ref="password"
                                                 className="form-control"
-                                                placeholder=""
-                                                required
-
+                                                placeholder="Password"
                                             />
 
                                             <div className="input-group-append">
 
-                                                <span className="input-group-text">
+                                                <span onClick={this.changePasswordVisibility}
+                                                      className="input-group-text">
 
-                                                    <img
-                                                        src={eye}/>
+                                                    <Icon> {!this.state.password_visibility ? `visibility_off` : `visibility`}</Icon>
 
                                                 </span>
 
@@ -157,14 +153,8 @@ class Login extends Component {
                                     </div>
 
                                     <div className="col-sm-12 form-group">
-                                     <p className="error-msg text-left">
-                                       Wrong Password. Try again or click Forgot password to reset it.
-                                     </p>
-                                    </div>
 
-                                    <div className="col-sm-12 form-group">
-
-                                        <button onClick={this.handleLogin} className="btn primary-btn">Sign in</button>
+                                        <button type="submit" className="btn primary-btn">Sign in</button>
 
                                     </div>
 
@@ -240,7 +230,10 @@ class Login extends Component {
             password_visibility: !this.state.password_visibility
         });
         this.refs.password.setAttribute('type', (!this.state.password_visibility ? `text` : `password`))
-    }
+    };
+
+
+    handleLogout = (event) => localStorage.removeItem('id_token');
 
 }
 

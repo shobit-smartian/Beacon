@@ -9,6 +9,9 @@ import researchImage from "../assets/images/reserch.png";
 
 export default class Home extends Component {
 
+
+
+
     render() {
 
         return (
