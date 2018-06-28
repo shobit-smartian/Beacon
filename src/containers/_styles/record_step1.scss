@@ -1,0 +1,49 @@
+.record-step1 {
+
+    .home-humility {
+        text-align: center;
+    }
+
+    .home-fa-twitter {
+        margin-left: 2em;
+    }
+
+    .card-header h2 {
+        font-weight: bold;
+    }
+
+    .card-block p {
+        color: #414965;
+        font-weight: bolder;
+        font-size: small;
+        width: 80%;
+        margin: 1em auto 3em;
+        button {
+
+        }
+    }
+
+    .input-group {
+        width: 75%;
+        margin: 0 auto;
+        input {
+            font-size: medium;
+        }
+    }
+
+    .chip-sec {
+        width: 75%;
+        margin: 0 auto;
+        margin-top: 2em;
+        .chip {
+            margin: 3px;
+            height: 27px;
+            span {
+                font-size: smaller;
+            }
+            svg {
+                font-size: large;
+            }
+        }
+    }
+}
