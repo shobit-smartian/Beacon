@@ -10,7 +10,11 @@ body{
       text-decoration: none;
     }   
 }
-
+.error-msg{
+        color: #f90606;margin-bottom: 25px;
+        i{vertical-align: middle;font-size: 14px;}
+        span{display: inline-block;vertical-align: middle;}
+    }
 ::placeholder{font-size: 14px;color: #a1a8c2!important;}
 .inner-wrapper{
     background-color: #f7f8fc;
@@ -49,7 +53,7 @@ body{
     }
 }
 .center-form{
-    max-width: 450px;
+    max-width: 500px;
     text-align: center;
     position: relative;
     top: 0;
@@ -166,7 +170,7 @@ label.checkbox-wrap{
 
 /*register page*/
 .center-form.register-form {
-    max-width: 450px;
+    max-width: 500px;
     text-align: center;
     top: 0;
     bottom: 0;
@@ -246,7 +250,7 @@ label.checkbox-wrap{
           top: 23px;
        }
     }
-    span.plan-name{font-size: 16px;position: relative;}
+    span.plan-name76{font-size: 16px;position: relative;}
 
     .details-container{
         max-width: 320px;
