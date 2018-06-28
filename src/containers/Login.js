@@ -72,15 +72,13 @@ class Login extends Component {
 
                             </div>
 
-                            <div className="col-sm-12">
 
-                                <div className="center-img">
+                            <div className="center-img">
 
                                     Image TBD
 
-                                </div>
-
                             </div>
+
 
                         </div>
 
