@@ -15,20 +15,22 @@ body{
 .inner-wrapper{
     background-color: #f7f8fc;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 20px;
 }
 .center-img{
-    max-width: 250px;
-    max-height: 250px;
+    width: 250px;
+    height: 250px;
     border: 1px solid gray;
     text-align: center;
-    position: absolute;
+    position: relative;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     margin: auto;
+    margin-top: 9rem;
+    margin-bottom: 2rem;
 }
 .login-wrapper{
     padding: 20px;
@@ -55,8 +57,8 @@ body{
     right: 0;
     left: 0;
     margin: auto;
-    max-height: 400px;
     margin-top: 7rem;
+    height: 100%;
    label{
     text-align: center;
     width: 100%;
@@ -164,6 +166,15 @@ label.checkbox-wrap{
 
 /*register page*/
 .center-form.register-form {
+    max-width: 450px;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    margin-top: 7rem;
+    height: 100%;
     p{
         font-size: 20px;
     }
@@ -202,5 +213,145 @@ label.checkbox-wrap{
         p:last-child{
             color: #abedde;
             font-size: 15px;
+            i{
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+            span{
+                display: inline-block;
+                vertical-align: middle;
+            }
+        } 
+}
+.billing-section{
+    max-width: 320px;
+    max-height: 560px;
+    text-align: center;
+    margin-top: 7rem;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    label{
+        font-size: 25px;
+    }
+    .plan-action{
+       justify-content: space-between;
+       align-items: center;
+       margin-top: 10px;
+       img.sale-img{
+          position: absolute;
+          right: 32px;
+          top: 23px;
+       }
+    }
+    span.plan-name{font-size: 16px;position: relative;}
+
+    .details-container{
+        max-width: 320px;
+        height: auto;
+        text-align: center;
+        margin-top: 2rem;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: white;
+        padding: 30px;
+        border-top: 7px solid #414964;
+        margin-bottom: 2rem;
+        .head-title{
+            font-size: 18px;
+            margin-top: 25px;
+           text-transform: uppercase;
         }
+        .points-list{
+            list-style-type: none;
+            text-align: left;
+            -webkit-padding-start: 0;
+            color: #9199b7;
+            li{display: flex;margin-bottom: 10px;
+                i{vertical-align: middle;margin-right: 8px;}
+                span{display: inline-block;vertical-align: middle;font-size: 14px;}
+            }
+        }
+    }
+    .price-container{
+       .value{
+        span{color: #9199b7;font-size: 23px;
+            label{
+                font-size: 65px;
+                vertical-align: text-top;
+                height: 70px;
+                margin-left: 6px;
+                margin-right: 6px;
+                margin-top: -18px;
+            }
+        }
+        span:last-child{vertical-align: bottom;font-size: 20px;}
+       }
+       .discount{
+        color: #66dec3;margin-top: 11px;font-size: 20px;
+       }
+    }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #414965;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

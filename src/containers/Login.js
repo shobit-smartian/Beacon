@@ -72,7 +72,7 @@ class Login extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 h-100">
+                            <div className="col-sm-12">
 
                                 <div className="center-img">
 

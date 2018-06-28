@@ -3,7 +3,7 @@ import {register} from "../actions/auth";
 
 
 import eye from '../assets/images/eye-icon.png';
-import lock from '../assets/images/lock.png';
+import lockActive from '../assets/images/lock-active.png';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -95,7 +95,7 @@ class Register extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 center-form register-form">
+                            <div className="col-sm-12 center-form register-payment">
 
                                 {
                                     registerError &&
@@ -109,19 +109,21 @@ class Register extends Component {
 
                                 <label>Get started with Beacon</label>
 
-                                <form className="mt-5">
+                                <div className="col-sm-12 form-group last-step-header">
+                                  <p>1. Create an account</p>
+                                  <p> <i class="material-icons">done</i><span>Done</span></p>
+                                </div>
 
-                                    <p>1. Create an account</p>
-
-                                    <div className="col-sm-12 form-group">
-
-                                        <input ref="name" type="text" placeholder="Full name" className="form-control" />
-
+                                <form className="mt-5 mb-4">
+                                  
+                                    <div className="headline">
+                                         <p>2. Payment <img src={lockActive} /></p>
+                                         <p> Sign up and proceed to payment</p>
                                     </div>
 
-                                    <div className="col-sm-12 form-group">
+                                    <div className="col-sm-12 form-group mt-3">
 
-                                        <input ref="email" type="text" placeholder="Your work email" className="form-control" />
+                                        <input ref="email" type="text" placeholder="Full name" className="form-control" />
 
                                     </div>
 
@@ -130,13 +132,19 @@ class Register extends Component {
                                         <div className="input-group">
 
 
-                                            <input ref="password" type="password" className="form-control" placeholder="Password" />
+                                            <input ref="password" type="password" className="form-control" placeholder="Credit card number" />
 
                                                 <div className="input-group-append">
 
                                                     <span className="input-group-text">
 
-                                                        <img src={eye} />
+                                                        MM / YY 
+
+                                                    </span>
+
+                                                    <span className="input-group-text">
+
+                                                        CVC
 
                                                     </span>
 
@@ -146,21 +154,15 @@ class Register extends Component {
 
                                     </div>
 
-                                    <div className="col-sm-12 form-group">
+                                    <div className="col-sm-12 form-group text-right">
 
-                                        <label className="checkbox-wrap"> I agree to the Terms of Service and Privacy Policy
-
-                                            <input type="checkbox" />
-
-                                                <span className="checkmark" > </span>
-
-                                        </label>
+                                        <a class="form-link-text">Enter a discount coupon</a>
 
                                     </div>
 
                                     <div className="col-sm-12 form-group">
 
-                                        <button onClick={this.saveUser} className="btn primary-btn">Continue</button>
+                                        <button onClick={this.saveUser} className="btn primary-btn">Pay $ 13 USD</button>
 
                                     </div>
 

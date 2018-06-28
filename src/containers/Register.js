@@ -3,7 +3,8 @@ import {register} from "../actions/auth";
 
 
 import eye from '../assets/images/eye-icon.png';
-import lockActive from '../assets/images/lock-active.png';
+import lock from '../assets/images/lock.png';
+import sale from '../assets/images/sale-banner.png';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -71,11 +72,43 @@ class Register extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 h-100">
+                            <div className="col-sm-12">
 
-                                <div className="center-img">
+                                <div className="billing-section">
 
-                                    Image TBD
+                                    <label>Choose a billing cycle</label>
+                                    <div className="d-flex plan-action">
+                                      
+                                      <span className="plan-name"> <img src={sale} className="sale-img" />Yearly</span>
+                                      <span>
+                                        <label className="switch">
+                                          <input type="checkbox" />
+                                          <span className="slider round"></span>
+                                        </label>
+                                      </span>
+                                      <span className="plan-name"> Monthly </span>
+                                    </div>
+                                    <div className="details-container">
+                                      <p className="head-title">Monthly</p>
+                                      <p className="form-link-text">
+                                        Document your user interviews faster  and get more from  your research over time.
+                                      </p>
+                                      <ul className="points-list">
+                                        <li><i class="material-icons">done</i> <span>Tag important moments live , during user interviews</span></li>
+                                        <li><i class="material-icons">done</i> <span> Synthesize your researchacross Google docs</span></li>
+                                        <li><i class="material-icons">done</i> <span> Documents user insights quickly and efficiently </span></li>
+                                      </ul>
+                                      <div className="price-container">
+                                        <div className="value">
+                                            <span>$<label>13</label>*</span>
+                                            <span>/MO</span>
+                                        </div>
+                                        <div className="discount">
+                                            Save 24 $ a year
+                                        </div>
+                                    </div>
+                                    </div>
+
 
                                 </div>
 
@@ -95,7 +128,7 @@ class Register extends Component {
 
                             </div>
 
-                            <div className="col-sm-12 center-form register-payment">
+                            <div className="col-sm-12 center-form register-form">
 
                                 {
                                     registerError &&
@@ -109,21 +142,19 @@ class Register extends Component {
 
                                 <label>Get started with Beacon</label>
 
-                                <div className="col-sm-12 form-group last-step-header">
-                                  <p>1. Create an account</p>
-                                  <p> <i class="material-icons">done</i><span>Done</span></p>
-                                </div>
+                                <form className="mt-5">
 
-                                <form className="mt-5 mb-4">
-                                  
-                                    <div className="headline">
-                                         <p>2. Payment <img src={lockActive} /></p>
-                                         <p> Sign up and proceed to payment</p>
+                                    <p>1. Create an account</p>
+
+                                    <div className="col-sm-12 form-group">
+
+                                        <input ref="name" type="text" placeholder="Full name" className="form-control" />
+
                                     </div>
 
                                     <div className="col-sm-12 form-group">
 
-                                        <input ref="email" type="text" placeholder="Full name" className="form-control" />
+                                        <input ref="email" type="text" placeholder="Your work email" className="form-control" />
 
                                     </div>
 
@@ -132,19 +163,13 @@ class Register extends Component {
                                         <div className="input-group">
 
 
-                                            <input ref="password" type="password" className="form-control" placeholder="Credit card number" />
+                                            <input ref="password" type="password" className="form-control" placeholder="Password" />
 
                                                 <div className="input-group-append">
 
                                                     <span className="input-group-text">
 
-                                                        MM / YY 
-
-                                                    </span>
-
-                                                    <span className="input-group-text">
-
-                                                        CVC
+                                                        <img src={eye} />
 
                                                     </span>
 
@@ -154,19 +179,33 @@ class Register extends Component {
 
                                     </div>
 
-                                    <div className="col-sm-12 form-group text-right">
+                                    <div className="col-sm-12 form-group">
 
-                                        <a class="form-link-text">Enter a discount coupon</a>
+                                        <label className="checkbox-wrap"> I agree to the Terms of Service and Privacy Policy
+
+                                            <input type="checkbox" />
+
+                                                <span className="checkmark" > </span>
+
+                                        </label>
 
                                     </div>
 
                                     <div className="col-sm-12 form-group">
 
-                                        <button onClick={this.saveUser} className="btn primary-btn">Pay $ 13 USD</button>
+                                        <button onClick={this.saveUser} className="btn primary-btn">Continue</button>
 
                                     </div>
 
                                 </form>
+
+                                <div className="col-lg-12 next-step-bar mt-5">
+
+                                    <label>2. Payment <img src={lock} /></label>
+
+                                    <p>Sign up and proceed to payment</p>
+
+                                </div>
 
                             </div>
 
