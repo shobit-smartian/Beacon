@@ -113,7 +113,7 @@ class Login extends Component {
                                  
                                 <div className="success-msg ">
 
-                                        <i className="material-icons">done</i> <span> You're all set. Sign in with your new password below. </span>
+                                        <i className="material-icons">done</i> <span> You're all set. Sign in with your new password below.z </span>
 
                                 </div>
 
@@ -182,7 +182,7 @@ class Login extends Component {
 
                                         <span className="float-right form-link-text">
 
-                                            <a href="">Forgot Password?</a>
+                                            <Link to="/forgot_password">Forgot Password?</Link>
 
                                         </span>
 

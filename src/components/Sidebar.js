@@ -15,10 +15,11 @@ class Sidebar extends Component {
         const pathname = this.props.history.location.pathname;
         const isLoginPage = pathname.indexOf("register") > -1;
         const isRegisterPage = pathname.indexOf("login") > -1;
+        const isForgotPasswordPage = pathname.indexOf("forgot_password") > -1;
 
         return (
 
-            !isLoginPage && !isRegisterPage &&
+            !isLoginPage && !isRegisterPage && !isForgotPasswordPage &&
 
             <div className="sidebar">
 

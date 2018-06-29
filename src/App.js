@@ -24,6 +24,7 @@ import NotFound from "./containers/misc/NotFound";
 
 import PrivateRoute from "./containers/misc/PrivateRoute";
 
+import ForgotPassword from "./containers/ForgotPassword";
 
 import "./app.css";
 
@@ -54,6 +55,8 @@ class App extends Component {
 
                                 <Route path="/register" component={Register}/>
 
+                                <Route path="/forgot_password" component={ForgotPassword}/>
+
                                 <Route path="/register_payment" component={RegisterPayment}/>
 
                                 <Route exact path="/login" component={Login}/>
@@ -64,7 +67,9 @@ class App extends Component {
 
                                 <Route path="/docs/:id" component={Docs}/>
 
+                                
                                 <Route component={NotFound}/>
+
 
                             </Switch>
 
