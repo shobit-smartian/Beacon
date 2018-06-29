@@ -118,7 +118,7 @@ class RecordStep4 extends Component {
                                             timeStamps.map(data => {
 
                                                 return (
-                                                    <Chip label={data.label} onDelete={this.deleteMarker(data)}
+                                                    <Chip label={data.label} onClick={this.addTimestamp(data.label)} onDelete={this.deleteMarker(data)}
                                                           className='chip'/>
                                                 );
                                             })
@@ -178,6 +178,11 @@ class RecordStep4 extends Component {
             this.refs.marker.value = null;
         }
     };
+
+    addTimestamp = data => () => {
+        //For adding timestamp with the marker
+        console.log(data)
+    }
 
 
     deleteMarker = data => () => {
