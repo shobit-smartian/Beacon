@@ -33,7 +33,7 @@ export default class Step2 extends Component {
 
                         <div className="card-header">
 
-                            <label className="step-count">STEP 2 of 3</label>
+                            <label className="step-count">STEP 2 of 4</label>
 
                             <h2>Remember to ask for permission</h2>
 
@@ -82,7 +82,7 @@ export default class Step2 extends Component {
 
                             </div>
 
-                            <button onClick={ ()=> this.props.history.push('/records/step_four')} disabled={!this.state.permissions.checkOne || !this.state.permissions.checkTwo} className="btn btn-primary">I
+                            <button onClick={ ()=> this.props.history.push('/records/step_three')} disabled={!this.state.permissions.checkOne || !this.state.permissions.checkTwo} className="btn btn-primary">I
                                 will ask for permission to record
                             </button>
 

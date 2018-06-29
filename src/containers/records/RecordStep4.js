@@ -25,7 +25,7 @@ class RecordStep4 extends Component {
         this.state = {
             recordTimer: `00:00`,
             audioStr: null,
-            timeStamps: [],
+            timeStamps: localStorage.chipData?JSON.parse(localStorage.chipData):[],
             audioUrl: null
         };
     }
@@ -59,7 +59,7 @@ class RecordStep4 extends Component {
 
 
     render() {
-
+        
         const {recordTimer, timeStamps, audioStr} = this.state;
 
         return (

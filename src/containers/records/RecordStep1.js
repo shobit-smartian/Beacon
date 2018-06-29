@@ -16,14 +16,13 @@ export default class RecordStep1 extends Component {
 
 
     state = {
-        chipData: [
-            {label: 'Angular'},
-            {label: 'jQuery'}
-        ],
+        chipData: localStorage.chipData?JSON.parse(localStorage.chipData):[]
     };
 
 
+
     render() {
+        
 
         return (
 
@@ -35,7 +34,7 @@ export default class RecordStep1 extends Component {
 
                         <div className="card-header">
 
-                            <label className="step-count">STEP 1 of 3</label>
+                            <label className="step-count">STEP 1 of 4</label>
 
                             <h2>Choose your markers</h2>
 
@@ -70,7 +69,7 @@ export default class RecordStep1 extends Component {
 
                             </div>
 
-                            <button onClick={ () => this.props.history.push('/records/step_two')} className="btn btn-primary">Next Step</button>
+                            <button onClick={ () =>  this.saveChips() } disabled={!this.state.chipData.length} className="btn btn-primary">Next Step</button>
 
                         </div>
 
@@ -98,6 +97,10 @@ export default class RecordStep1 extends Component {
         this.setState({chipData});
     };
 
+    saveChips = () => {
+        localStorage.setItem("chipData",JSON.stringify(this.state.chipData))        
+        this.props.history.push('/records/step_two')
+    }
 
     addMarker = (e) => {
 

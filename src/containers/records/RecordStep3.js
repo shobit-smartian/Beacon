@@ -66,7 +66,7 @@ export default class Step2 extends Component {
 
                             </div>
 
-                            <button onClick={ ()=> this.props.history.push('/records/step_four')} disabled={!this.state.permissions.checkOne || !this.state.permissions.checkTwo} className="btn btn-primary">Got it! I'm ready to begin
+                            <button onClick={ ()=> this.props.history.push('/records/step_four')} className="btn btn-primary">Got it! I'm ready to begin
                             </button>
 
                         </div>
