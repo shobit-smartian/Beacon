@@ -58,11 +58,11 @@ class App extends Component {
 
                                 <Route exact path="/login" component={Login}/>
 
-                                <PrivateRoute isAuthenticated={isAuthenticated}  path="/home" component={Home} />
+                                <Route path="/home" component={Home} />
 
-                                <PrivateRoute isAuthenticated={isAuthenticated} path="/records" component={Record}/>
+                                <Route path="/records" component={Record}/>
 
-                                <PrivateRoute isAuthenticated={isAuthenticated} path="/docs/:id" component={Docs}/>
+                                <Route path="/docs/:id" component={Docs}/>
 
                                 <Route component={NotFound}/>
 

@@ -110,6 +110,12 @@ class Login extends Component {
 
                                     </div>
                                 }
+                                 
+                                <div className="success-msg ">
+
+                                        <i className="material-icons">done</i> <span> You're all set. Sign in with your new password below. </span>
+
+                                </div>
 
                                 <label>Welcome to Beacon</label>
 

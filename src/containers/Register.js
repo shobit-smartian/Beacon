@@ -30,12 +30,12 @@ class Register extends Component {
         if (nextProps.user) {
             // logged in, let's show redirect if any, or show home
             try {
-                const {from} = this.props.location.state || {
-                    from: {pathname: "/login"}
-                };
-                nextProps.history.replace(from);
+                // const {from} = this.props.location.state || {
+                //     from: {pathname: "/login"}
+                // };
+                // nextProps.history.replace(from);
             } catch (err) {
-                nextProps.history.replace("/login");
+                // nextProps.history.replace("/login");
             }
         }
     }
@@ -226,6 +226,15 @@ class Register extends Component {
 
                                         <a className="form-link-text">Enter a discount coupon</a>
 
+                                    </div>
+
+                                    <div className="col-sm-12 d-flex">
+                                      <input type="text" className="form-control" placeholder="Discount code" />
+                                      <button className="btn discount_btn"> Apply</button>
+                                    </div>
+
+                                    <div className="col-sm-12 error-msg text-left mb-0">
+                                        Your discount code is invalid. Check it and try again.
                                     </div>
 
                                     <div className="col-sm-12 form-group">
