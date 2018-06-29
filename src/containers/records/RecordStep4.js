@@ -84,6 +84,8 @@ class RecordStep4 extends Component {
 
                             <div className="card-block">
 
+                                <div className="form-group d-flex justify-content-center mt-3">
+
                                 <div className="record-sec">
 
                                     <AudioRecorder
@@ -94,14 +96,18 @@ class RecordStep4 extends Component {
                                         downloadLabel={false}
                                         playLabel={false}
                                     />
+                                </div>
 
                                     <div className="timer">{recordTimer}</div>
+                                </div>
 
-                                    <div className="input-group">
+                                    <div className="input-group mt-4">
 
                                         <label>Add a new marker</label>
 
-                                        <input ref="marker" className="form-control" onKeyPress={this.addMarker}/>
+                                        <input ref="marker" className="form-control" onKeyPress={this.addMarker} placeholder="Enter text to add a new marker" />
+
+                                        <span><i className="material-icons">add</i></span>
 
                                     </div>
 
@@ -125,21 +131,20 @@ class RecordStep4 extends Component {
 
                                 <button disabled={!audioStr} onClick={ ()=> this.props.dispatch(saveRecord(this.state))} className="btn btn-primary">Save my interview</button>
 
+                                <div className="card-footer">
+
+                                    <a href="">Skip this step</a>
+
+                                </div>
+
                             </div>
 
-                            <div className="card-footer">
-
-                                <a href="">Skip this step</a>
-
-                            </div>
 
                         </div>
 
                     </div>
 
                 </div>
-
-            </div>
 
         );
 

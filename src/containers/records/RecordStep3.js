@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import Checkbox from '@material-ui/core/Checkbox'
 
 // other dependencies
-import "../_styles/record_step2.scss";
+import "../_styles/record_step3.scss";
 
 
 export default class Step2 extends Component {
@@ -23,7 +23,7 @@ export default class Step2 extends Component {
 
         return (
 
-            <div className="row record-step2">
+            <div className="row record-step3">
 
                 <div className="offset-sm-3 col-sm-6">
 
@@ -33,44 +33,28 @@ export default class Step2 extends Component {
 
                         <div className="card-header">
 
-                            <label className="step-count">STEP 2 of 3</label>
+                            <label className="step-count">STEP 3 of 4</label>
 
-                            <h2>Remember to ask for permission</h2>
+                            <h2>Almost there!</h2>
 
 
                         </div>
 
                         <div className="card-block">
 
-                            <p>You are required to ask your interviewee for permission to record in order to use
-
-                                Beacon. Here are some examples of how to ask for consent:</p>
+                            <p>In the next step you'll begin recording your interview. Here is a quick overview of everything your need to know.</p>
 
                             <ol>
 
-                                <li>"We would like to record this interview. is that okay?"</li>
+                                <li>Click Record to begin recording.</li>
 
-                                <li>"We are taking in a lot of new information today. Would it be okay to record
-
-                                    the interview for notemaking purposes?"
-
-                                </li>
+                                <li>Click the markers to tag important moments when they happen throughout your interview.</li>
+                                <li>Remove markers you don't need  or add new ones as you go.</li>
+                                <li>Don't forget to click once you're finished.</li>
+                                <li>If you are recording a call, keep it on your speaker.</li>
 
                             </ol>
 
-
-                            <div className="form-check text-left d-flex">
-
-
-                                <Checkbox onChange={this.changePermission('checkOne')} id='check1'
-                                          checked={this.state.permissions.checkOne} color="primary"/>
-
-                                <label className="form-check-label" for="check1"> Check here to indicate that
-                                    you will ask participants for permission to
-                                    record the conversation. US federal law prohibits recording a conversation
-                                    without consent. </label>
-
-                            </div>
 
                             <div className="form-check text-left">
 
@@ -82,8 +66,7 @@ export default class Step2 extends Component {
 
                             </div>
 
-                            <button onClick={ ()=> this.props.history.push('/records/step_four')} disabled={!this.state.permissions.checkOne || !this.state.permissions.checkTwo} className="btn btn-primary">I
-                                will ask for permission to record
+                            <button onClick={ ()=> this.props.history.push('/records/step_four')} disabled={!this.state.permissions.checkOne || !this.state.permissions.checkTwo} className="btn btn-primary">Got it! I'm ready to begin
                             </button>
 
                         </div>

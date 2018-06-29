@@ -50,8 +50,9 @@ export default class RecordStep1 extends Component {
 
                                 <label>Add a new marker</label>
 
-                                <input ref="marker" className="form-control" onKeyPress={this.addMarker}/>
-
+                                <input ref="marker" className="form-control" onKeyPress={this.addMarker} placeholder="Enter text to add a new marker" />
+                                
+                                <span><i className="material-icons">add</i></span>
                             </div>
 
 
