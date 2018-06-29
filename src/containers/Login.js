@@ -37,11 +37,11 @@ class Login extends Component {
             // logged in, let's show redirect if any, or show home
             try {
                 const {from} = this.props.location.state || {
-                    from: {pathname: "/"}
+                    from: {pathname: "/home"}
                 };
                 nextProps.history.replace(from);
             } catch (err) {
-                nextProps.history.replace("/");
+                nextProps.history.replace("/home");
             }
         }
     }
