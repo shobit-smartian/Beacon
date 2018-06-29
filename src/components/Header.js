@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {withRouter} from "react-router";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -27,70 +27,75 @@ class Header extends Component {
         const isLoginPage = pathname.indexOf("register") > -1;
         const isRegisterPage = pathname.indexOf("login") > -1;
         const isForgotPasswordPage = pathname.indexOf("forgot_password") > -1;
+        if(localStorage.id_token){
+            return (
 
-        return (
+                !isLoginPage && !isRegisterPage && !isForgotPasswordPage &&
+                
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
 
-            !isLoginPage && !isRegisterPage && !isForgotPasswordPage &&
+                    <div className="navbar-brand">
 
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                        <Link to="/" className="pull-left">
 
-                <div className="navbar-brand">
+                            <img src={logo} alt="logo"/>
 
-                    <Link to="/" className="pull-left">
+                        </Link>
 
-                        <img src={logo} alt="logo"/>
+                        <Link to="/" className="pull-right">
 
-                    </Link>
+                            <img src={menu} alt="logo"/>
 
-                    <Link to="/" className="pull-right">
+                        </Link>
 
-                        <img src={menu} alt="logo"/>
+                    </div>
 
-                    </Link>
+                    <button
+                        type="button"
+                        className="navbar-toggler"
+                        data-toggle="collapse"
+                        data-target="#navbarCollapse"
+                    >
 
-                </div>
+                        <span className="navbar-toggler-icon"/>
 
-                <button
-                    type="button"
-                    className="navbar-toggler"
-                    data-toggle="collapse"
-                    data-target="#navbarCollapse"
-                >
+                    </button>
 
-                    <span className="navbar-toggler-icon"/>
+                    <div id="navbarCollapse" className="collapse navbar-collapse">
 
-                </button>
+                        <form className="form-inline my-2 my-lg-0">
 
-                <div id="navbarCollapse" className="collapse navbar-collapse">
+                            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
 
-                    <form className="form-inline my-2 my-lg-0">
+                        </form>
 
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <ul className="navbar-nav ml-auto mt-2 mt-md-0">
 
-                    </form>
+                            <li>
 
-                    <ul className="navbar-nav ml-auto mt-2 mt-md-0">
+                                <span className="proicon">A</span>
 
-                        <li>
+                                <i className="fa fa-angle-down"> </i>
 
-                            <span className="proicon">A</span>
+                            </li>
 
-                            <i className="fa fa-angle-down"> </i>
+                            <li>
+                                <button onClick={this.onLogoutClick} className="btn btn-danger"> Logout </button>
+                            </li>
 
-                        </li>
-
-                        <li>
-                            <button onClick={this.onLogoutClick} className="btn btn-danger"> Logout </button>
-                        </li>
-
-                    </ul>
+                        </ul>
 
 
-                </div>
+                    </div>
 
-            </nav>
+                </nav>
 
-        );
+            );
+        }else{
+            return (
+                <Redirect to='/login'  />
+            )
+        }
     }
 }
 

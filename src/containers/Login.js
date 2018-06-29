@@ -32,16 +32,16 @@ class Login extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-
+        
         if (nextProps.user) {
             // logged in, let's show redirect if any, or show home
             try {
                 const {from} = this.props.location.state || {
-                    from: {pathname: "/home"}
+                    from: {pathname: "/"}
                 };
                 nextProps.history.replace(from);
             } catch (err) {
-                nextProps.history.replace("/home");
+                nextProps.history.replace("/");
             }
         }
     }
