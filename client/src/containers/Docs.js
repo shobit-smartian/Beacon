@@ -1,0 +1,268 @@
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {getRecord} from "../actions/records";
+
+
+// css dependencies
+import './_styles/docs.scss';
+
+
+class Docs extends Component {
+
+    constructor(props) {
+
+        super(props);
+
+        this.state = {
+            record: {
+                markers: []
+            },
+            playing:false,
+            percent:"0",
+            sec:0,
+            isPaused:0
+        }
+        this.setState(...this.state);
+    }
+
+
+    componentDidMount() {
+
+        this.props.dispatch(getRecord(this.props.match.params.id));
+    }
+
+
+    componentWillReceiveProps(nextProps, props) {
+
+        if (nextProps !== props) {
+
+            this.state.record = nextProps.record
+            let last=0;
+            this.state.listItems = nextProps.record.markers.map((number,index) => {
+                    let timeArr = number.timeConstraint.split(':');
+                    let secs=parseInt(timeArr[0]*60)+parseInt(timeArr[1]);
+                    let prog=(secs/nextProps.record.media_length)*100;
+                    if(index>0){
+                        let lastTimeArr = nextProps.record.markers[index-1].timeConstraint.split(":");
+                        let lastSecs=(lastTimeArr[0]*60)+lastTimeArr[1];
+                        let lastProg=(lastSecs/nextProps.record.media_length)*100;
+                        prog=prog-lastProg;    
+                    }
+                    
+                    return <span style={{"margin-left":prog+"%"}} onClick={this.skipPlay(secs)}>|</span>;
+                }
+            );
+            this.setState(...this.state);
+            console.log("this.state",this.state)
+        }
+    }    
+
+
+    render() {
+
+        const {record, percent, sec, isPaused, listItems} = this.state;
+
+        return (
+
+            <div className="main-content">
+
+                <div className="row">
+
+                    <div className="col-sm-7 sidearea player-div">
+
+                        <div className="back">
+
+                            <a href=""><i className="fa fa-angle-left"> </i></a>
+
+                        </div>
+
+                        <div className="player">
+
+                            <p onClick={this.playPauseSong} style={{"float":"left"}}>Play/Pause</p>
+
+                            <audio id="audio" onEnded={this.endProgress} src={`http://localhost:4101/${record.blob_str}`} style={{"display":"none"}}>
+
+                                <source type="audio/wav"/>
+
+                                Your Browser doesn't support this HTML Tag
+
+                            </audio>
+                            <div style={{"width":"80%", "margin":"0 auto"}}>{this.state.listItems}</div>
+                            <div className="progressBar">
+                                <div className="progress" style={{"width":this.state.percent+'%'}}></div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className="row">
+
+                    <div className="col-sm-7 sidearea">
+
+                        <div className="docs-wrapper">
+
+                            <h1>Untitled Document</h1>
+
+                            <a href="" className="dropToggle"><i className="fa fa-ellipsis-h"> </i></a>
+
+                            <div className="timers">
+
+                                {
+                                    // console.log(record.markers)
+                                    record.markers.map((value, index) => {
+                                        return (
+                                            <div className="timeline">
+                                                <span>{value.timeConstraint}</span>{value.label}
+                                            </div>
+                                        )
+                                    })
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className="col-sm-3">
+
+                        <div className="quicktip greenbg">
+
+                            <a href="" className="close">x</a>
+
+                            <h4>Quick tips:</h4>
+
+                            <ul>
+
+                                <li>-Ctrl+I adds italic formatting and Ctrl+B adds bold formatting</li>
+
+                                <li>-Press ESC to play/pause, and Ctrl+j to insert the current timestamp</li>
+
+                            </ul>
+
+                        </div>
+
+                        <div className="quicktip">
+
+                            <a href="" className="close">x</a>
+
+                            <h4>Quick tips:</h4>
+
+                            <ul>
+
+                                <li>-Ctrl+I adds italic formatting and Ctrl+B adds bold formatting</li>
+
+                                <li>-Press ESC to play/pause, and Ctrl+j to insert the current timestamp</li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div className="col-sm-2 sharebox">
+
+                        <ul>
+
+                            <li>History <span> <i className=""> </i> </span></li>
+
+                            <li>Save to Google Drive <span>
+
+
+                                <div className="g-savetodrive"
+                                                                 data-src='//localhost:4101/uploads/audio314.wav'
+                                                                 data-filename="Sample.wav"
+                                                                 data-sitename="Beacon">
+</div> </span></li>
+
+                            <li>Quick tips <span> <i className=""> </i> </span></li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        );
+
+    }
+
+
+    handleError = (error) => {
+        throw (error.message)
+    }
+
+    playPauseSong = () => {
+        if(this.state.playing){            
+            document.getElementById("audio").pause(); 
+            clearInterval(this.state.interval);
+            this.state.interval=0; 
+            this.state.isPaused=1;
+            this.setState({...this.state});
+        }else{
+            this.state.isPaused=0;
+            if(this.state.percent>=100){
+                this.state.percent=0;
+                this.state.sec=0;
+                this.state.isPaused=0
+                this.setState({...this.state});
+            }
+            document.getElementById("audio").play();
+            this.progressUpdate();
+        }
+        this.state.playing=!this.state.playing;
+        this.setState({...this.state});
+
+    }
+
+    endProgress = () => {     
+        clearInterval(this.state.interval);
+        this.state.sec=0;
+        this.state.interval=0;        
+        this.state.playing=0;
+        this.state.isPaused=0;
+        this.setState({...this.state});
+    }
+    
+    progressUpdate(){
+        let length = this.state.record.media_length;
+        this.state.interval = setInterval(this.updateProgress,1000)
+        this.setState({...this.state});
+    }
+
+    updateProgress = () => {
+        if(!this.state.isPaused){
+            this.state.sec+=1;
+            this.state.percent=((this.state.sec/this.state.record.media_length)*100);
+            this.setState({...this.state});
+        }        
+    }    
+
+    skipPlay = data => () => {
+        this.state.sec=data-1;
+        this.state.percent=((this.state.sec/this.state.record.media_length)*100);
+        document.getElementById("audio").currentTime = data;
+        document.getElementById("audio").play();
+        this.progressUpdate();
+    }
+}
+
+function mapStateToProps(state) {
+
+    const {records} = state;
+
+    console.log(state)
+
+    if (records) {
+        return records
+    }
+    return {success: false};
+}
+
+export default connect(mapStateToProps)(Docs);
