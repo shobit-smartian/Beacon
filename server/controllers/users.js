@@ -159,18 +159,10 @@ exports.register = function (req, res, next) {
                     ], function (err, result) {
 
                         if (err) {
-                            return res.status(400).jsonp({
-                                status: false,
-                                message: "There is an internal server error",
-                                err: err
-                            });
+                            return res.status(400).jsonp({ status: false, message: "There is an internal server error", err: err });
                         }
 
-                        return res.status(200).jsonp({
-                            status: true,
-                            message: "User has been registered successfully",
-                            data: result
-                        });
+                        return res.status(200).jsonp({ status: true, message: "User has been registered successfully", data: result });
                     });
 
                 }

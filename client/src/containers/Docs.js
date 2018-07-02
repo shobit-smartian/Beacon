@@ -76,6 +76,7 @@ class Docs extends Component {
         const totalAudioDuration = `${(totalDurationMin < 9) ? '0' + totalDurationMin : totalDurationMin}:${(totalDurationSec < 9) ? '0' + totalDurationSec : totalDurationSec}`;
         const completedAudioDuration = `${(compDurationMin < 9) ? '0' + compDurationMin : compDurationMin}:${(compDurationSec < 9) ? '0' + compDurationSec : compDurationSec}`;
 
+
         return (
 
             <div className="main-content">
@@ -253,7 +254,7 @@ class Docs extends Component {
         clearInterval(this.state.interval);
         this.state.sec=0;
         this.state.interval=0;
-        this.state.percent=0;
+        // this.state.percent=0;
         this.state.playing=0;
         this.state.isPaused=1;
         this.setState({...this.state});
@@ -261,7 +262,7 @@ class Docs extends Component {
 
     progressUpdate(){
         let length = this.state.record.media_length;
-        this.state.interval = setInterval(this.updateProgress,1000)
+        this.state.interval = setInterval(this.updateProgress,1000);
         this.setState({...this.state});
     }
 
@@ -275,12 +276,17 @@ class Docs extends Component {
 
     skipPlay = data => () => {
 
-        this.state.sec=data-1;
+
+        this.state.sec = data;
         this.state.percent=((this.state.sec/this.state.record.media_length)*100);
         document.getElementById("audio").currentTime = data;
         document.getElementById("audio").play();
-        console.log(this.state.isPaused, this.state.progress)
-        if(this.state.isPaused || this.state.progress === 0) {
+        this.setState({...this.state});
+
+        if(this.state.isPaused) {
+            this.state.sec=data;
+            this.state.isPaused = 0;
+            this.setState({...this.state});
             this.progressUpdate();
         }
     }
@@ -289,8 +295,6 @@ class Docs extends Component {
 function mapStateToProps(state) {
 
     const {records} = state;
-
-    console.log(state)
 
     if (records) {
         return records

@@ -67,7 +67,7 @@ export function register(user, plan) {
             return { type: REGISTER_REQUEST }
         },
         payload => {
-            return { type: REGISTER_SUCCESS, user: payload.data };
+            return { type: REGISTER_SUCCESS, payload: payload };
         },
         error => {
             return { type: REGISTER_FAILURE, error };

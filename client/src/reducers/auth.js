@@ -42,7 +42,7 @@ export default function auth(state = initializeState(), action = {}) {
             return {...state, ...{registerIn: true, registerError: null}};
 
         case REGISTER_SUCCESS:
-            return {...state, ...{registerIn: false, registerError: null}};
+            return {...state, ...{registerIn: false, registerError: null, response: action.payload}};
 
         case REGISTER_FAILURE:
             return {...state, ...{registerIn: false, registerError: action.error}};

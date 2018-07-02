@@ -32,7 +32,7 @@ class Login extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        
+
         if (nextProps.user) {
             // logged in, let's show redirect if any, or show home
             try {
@@ -111,46 +111,95 @@ class Login extends Component {
                                     </div>
                                 }
 
-                                <label>Tell us about yourself</label>
+                                <label>Welcome to Beacon</label>
 
                                 <form onSubmit={this.handleLogin} className="mt-5 mb-4">
 
                                     <div className="col-sm-12 form-group">
-                                       <p className="text-left"> What will you use Beacon for? </p>
 
-                                        <select className="form-control">
-                                          <option>User Research</option>
-                                          <option>Academic Research</option>
-                                          <option>Customer Discovery</option>
-                                          <option>Other</option>
-                                        </select>
+                                        <input
+                                            ref="username"
+                                            type="email"
+                                            placeholder="Your work email"
+                                            className="form-control"
+                                        />
 
                                     </div>
+
                                     <div className="col-sm-12 form-group">
-                                       <p className="text-left"> What's the name of your organisation?</p>
 
-                                        <input type="text" name="" class="form-control" placeholder="Organisation Name"/>
+                                        <div className="input-group">
+
+                                            <input
+                                                type="password"
+                                                ref="password"
+                                                className="form-control"
+                                                placeholder="Password"
+                                            />
+
+                                            <div className="input-group-append">
+
+                                                <span onClick={this.changePasswordVisibility}
+                                                      className="input-group-text">
+
+                                                    <Icon> {!this.state.password_visibility ? `visibility_off` : `visibility`}</Icon>
+
+                                                </span>
+
+                                            </div>
+
+                                        </div>
 
                                     </div>
+
                                     <div className="col-sm-12 form-group">
-                                       <p className="text-left"> What's your role?</p>
 
-                                        <input type="text" name="" placeholder="Job title" class="form-control"/>
-
-                                    </div>
-                                    <div className="col-sm-12 form-group">
-                                       <p className="text-left"> How big is your team? </p>
-
-                                        <select className="form-control">
-                                          <option>1-3 people</option>
-                                          <option>4-10 people</option>
-                                          <option>10+ people</option>
-                                        </select>
+                                        <button disabled={loggingIn} type="submit" className="btn primary-btn">
+                                            {
+                                                loggingIn ? <CircularProgress size={15} color={'white'} /> : `Sign in`
+                                            }
+                                        </button>
 
                                     </div>
 
-                                    <div className="col-sm-12 form-group welcome-bottom-bar">
-                                        <div className="skip">skip</div> <button className="btn primary-btn">Update my profile</button>
+                                    <div className="col-sm-12 p-4">
+
+                                        <span className="float-left form-link-text">
+
+                                            <label className="checkbox-wrap">
+
+                                                Remember me
+
+                                                <input type="checkbox"/>
+
+                                                <span className="checkmark"> </span>
+
+                                            </label>
+
+                                        </span>
+
+                                        <span className="float-right form-link-text">
+
+                                            <a href="">Forgot Password?</a>
+
+                                        </span>
+
+                                    </div>
+
+                                    <div className="col-sm-12 bottom-bar">
+
+                                        <span className="form-link-text">
+
+                                            <a href="">Don't have an account?  </a>
+
+                                        </span>
+
+                                        <span>
+
+                                            <Link to="/register">Sign up</Link>
+
+                                        </span>
+
                                     </div>
 
                                 </form>

@@ -34,6 +34,17 @@ class RegisterPayment extends Component {
     }
 
 
+    componentWillReceiveProps(nextProps, props) {
+
+        if (nextProps.response.status) {
+            return this.props.history.push('/login')
+        }
+        this.setState({
+            ...this.state, ...{validateErr: nextProps.response.message}
+        })
+    }
+
+
     render() {
 
         const {validateErr, userInfo, coupon, couponErr, plan_type} = this.state;
@@ -329,10 +340,12 @@ RegisterPayment.propTypes = {
 
 function mapStateToProps(state) {
 
+    console.log(state)
+
     const {auth} = state;
 
     if (auth) {
-        return {user: {email: '', name: ''}, registerError: auth.registerError};
+        return auth;
     }
     return {user: null};
 }
