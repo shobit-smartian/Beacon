@@ -45,14 +45,40 @@
 }
 
 
+
 .progressBar {
-    width: 80%;
-    height: 10px;
-    background-color: #ddd;
+    width: calc(100% - 160px);
+    height: 9px;
+    background-color: #dce1ec;
     border-radius: 4px;
-    margin: -10px auto 0px auto;
+    margin-top: 0;
+    box-shadow: inset 0px 0px 7px #adb3bf;
+    margin-left: 103px;
+    line-height: 0;
+    small{
+        position: absolute;
+        top: 44px;
+        color: #b7bbcd;
+    }
 }
 .progress {
     height: 100%;
     border-radius: 4px;
+    background: linear-gradient(to right, rgba(221,224,228,1) 15%,rgba(221,224,228,1) 16%,rgba(71,128,247,1) 100%)
+}
+
+.player span{
+    border-right: 2px solid #a4aac2;
+    position: relative;
+}
+.player span:after{
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background-color: #fff;
+    border: 2px solid #a4aac2;
+    border-radius: 50%;
+    top: -2px;
+    left: -3px;
 }

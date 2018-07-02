@@ -20,8 +20,9 @@ class Docs extends Component {
             playing:false,
             percent:"0",
             sec:0,
-            isPaused:0
-        }
+            isPaused: 1,
+            duration: 0
+        };
         this.setState(...this.state);
     }
 
@@ -36,8 +37,11 @@ class Docs extends Component {
 
         if (nextProps !== props) {
 
-            this.state.record = nextProps.record;
             let last = 0;
+
+            this.state.record = nextProps.record;
+            this.state.duration = nextProps.record.media_length;
+
             this.state.listItems = nextProps.record.markers.map((number,index) => {
 
                     let timeArr = number.timeConstraint.split(':');
@@ -48,21 +52,29 @@ class Docs extends Component {
                         let lastTimeArr = nextProps.record.markers[index-1].timeConstraint.split(":");
                         let lastSecs=(lastTimeArr[0]*60)+lastTimeArr[1];
                         let lastProg=(lastSecs/nextProps.record.media_length)*100;
-                        prog=prog-lastProg;    
+                        prog=prog-lastProg;
                     }
-                    
-                    return <span className='bubble' style={{marginLeft: prog+"%"}} onClick={this.skipPlay(secs)}>|</span>;
+
+                    return <span className='bubble' style={{marginLeft: prog+"%"}} onClick={this.skipPlay(secs)}> </span>;
                 }
             );
             this.setState(...this.state);
             console.log("this.state",this.state)
         }
-    }    
+    }
 
 
     render() {
 
-        const {record, percent, sec, isPaused, listItems} = this.state;
+        const {record, percent, sec, listItems, duration, isPaused} = this.state;
+
+        const totalDurationMin = (Math.trunc(duration / 60));
+        const totalDurationSec = (duration % 60);
+        const compDurationMin = (Math.trunc(sec / 60));
+        const compDurationSec = (sec % 60);
+
+        const totalAudioDuration = `${(totalDurationMin < 9) ? '0' + totalDurationMin : totalDurationMin}:${(totalDurationSec < 9) ? '0' + totalDurationSec : totalDurationSec}`;
+        const completedAudioDuration = `${(compDurationMin < 9) ? '0' + compDurationMin : compDurationMin}:${(compDurationSec < 9) ? '0' + compDurationSec : compDurationSec}`;
 
         return (
 
@@ -80,9 +92,13 @@ class Docs extends Component {
 
                         <div className="player">
 
-                            <p onClick={this.playPauseSong} style={{"float":"left"}}>Play/Pause</p>
+                            <div onClick={this.playPauseSong} style={{float: "left"}} className="play-icons">
+                                <i className="fa fa-step-backward" aria-hidden="true"> </i>
+                                <i className={`fa fa-${isPaused ? 'play' : 'pause'} active`} aria-hidden="true"> </i>
+                                <i className="fa fa-step-forward" aria-hidden="true"> </i>
+                            </div>
 
-                            <audio id="audio" onEnded={this.endProgress} src={`http://localhost:4101/${record.blob_str}`} style={{"display":"none"}}>
+                            <audio id="audio" onEnded={this.endProgress} src={`http://localhost:4101/${record.blob_str}`} style={{display: "none"}}>
 
                                 <source type="audio/wav"/>
 
@@ -90,12 +106,20 @@ class Docs extends Component {
 
                             </audio>
 
-                            <div style={{"width":"80%", "margin":"0 auto"}}>{this.state.listItems}</div>
-
+                            <div style={{width: "calc(100% - 160px)", marginLeft: "103px", lineHeight: 0, marginTop: "13px"}}>{listItems}</div>
 
                             <div className="progressBar">
 
-                                <div className="progress" style={{"width":this.state.percent+'%'}}> </div>
+                                <div className="progress" style={{width: `${percent}%`}}> </div>
+
+                                <small> {completedAudioDuration}/{totalAudioDuration} </small>
+
+
+                            </div>
+
+                            <div className="download-icon">
+
+                                <i className="fa fa-download" aria-hidden="true"> </i>
 
                             </div>
 
@@ -176,14 +200,12 @@ class Docs extends Component {
 
                             <li>History <span> <i className=""> </i> </span></li>
 
-                            <li>Save to Google Drive <span>
+                            <li> Save to Google Drive
 
+                                <span>
+                                </span>
 
-                                <div className="g-savetodrive"
-                                                                 data-src='//localhost:4101/uploads/audio314.wav'
-                                                                 data-filename="Sample.wav"
-                                                                 data-sitename="Beacon">
-</div> </span></li>
+                            </li>
 
                             <li>Quick tips <span> <i className=""> </i> </span></li>
 
@@ -202,13 +224,13 @@ class Docs extends Component {
 
     handleError = (error) => {
         throw (error.message)
-    }
+    };
 
     playPauseSong = () => {
-        if(this.state.playing){            
-            document.getElementById("audio").pause(); 
+        if(this.state.playing){
+            document.getElementById("audio").pause();
             clearInterval(this.state.interval);
-            this.state.interval=0; 
+            this.state.interval=0;
             this.state.isPaused=1;
             this.setState({...this.state});
         }else{
@@ -227,15 +249,16 @@ class Docs extends Component {
 
     }
 
-    endProgress = () => {     
+    endProgress = () => {
         clearInterval(this.state.interval);
         this.state.sec=0;
-        this.state.interval=0;        
+        this.state.interval=0;
+        this.state.percent=0;
         this.state.playing=0;
-        this.state.isPaused=0;
+        this.state.isPaused=1;
         this.setState({...this.state});
     }
-    
+
     progressUpdate(){
         let length = this.state.record.media_length;
         this.state.interval = setInterval(this.updateProgress,1000)
@@ -247,15 +270,19 @@ class Docs extends Component {
             this.state.sec+=1;
             this.state.percent=((this.state.sec/this.state.record.media_length)*100);
             this.setState({...this.state});
-        }        
-    }    
+        }
+    }
 
     skipPlay = data => () => {
+
         this.state.sec=data-1;
         this.state.percent=((this.state.sec/this.state.record.media_length)*100);
         document.getElementById("audio").currentTime = data;
         document.getElementById("audio").play();
-        this.progressUpdate();
+        console.log(this.state.isPaused, this.state.progress)
+        if(this.state.isPaused || this.state.progress === 0) {
+            this.progressUpdate();
+        }
     }
 }
 
