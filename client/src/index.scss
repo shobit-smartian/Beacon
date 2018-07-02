@@ -232,7 +232,38 @@ body {
       .player {
         width: 100%;
         height: 55px;
-        background-color: $white;
+        background-color: #e3e6ee;
+        padding: 12px 0;
+        .play-icons{
+        float: left;
+        width: 100px;
+        padding: 5px 0 5px 5px;
+          i{
+            color: #8d95b3;
+            padding: 0 14px;
+            cursor:pointer;
+            font-size:12px;
+          }
+          i.active{
+          color: #525a72;
+          background-color: #b7bbcc;
+          padding: 6px;
+          border-radius: 50%;
+          }
+        }
+        .download-icon{
+            float: right;
+            margin-top: -22px;
+            margin-right: 14px;
+            i{
+              color: #525a72;
+              background-color: #b7bbcc;
+              padding: 6px;
+              border-radius: 50%;
+              font-size:12px;
+              margin-top: 4px;
+            }
+        }
       }
     }
     .docs-wrapper {

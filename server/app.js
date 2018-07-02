@@ -58,7 +58,7 @@ var walk = function(path) {
 };
 walk(models_path);
 
-mongoose.connect('mongodb://localhost/audiosynthesizer',{useMongoClient:true});
+mongoose.connect('mongodb://beacon-user:abc123@ds121871.mlab.com:21871/beacon',{useMongoClient:true});
 mongoose.Promise = global.Promise;
 process.on('unhandledRejection', up => { return up })
 var Schema = mongoose.Schema;

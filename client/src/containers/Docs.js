@@ -49,7 +49,7 @@ class Docs extends Component {
                         prog=prog-lastProg;    
                     }
                     
-                    return <span style={{"margin-left":prog+"%"}} onClick={this.skipPlay(secs)}>|</span>;
+                    return <span style={{"margin-left":prog+"%"}} onClick={this.skipPlay(secs)}></span>;
                 }
             );
             this.setState(...this.state);
@@ -78,7 +78,11 @@ class Docs extends Component {
 
                         <div className="player">
 
-                            <p onClick={this.playPauseSong} style={{"float":"left"}}>Play/Pause</p>
+                            <div onClick={this.playPauseSong} style={{"float":"left"}} className="play-icons">
+                              <i className="fa fa-step-backward" aria-hidden="true"></i>
+                              <i className="fa fa-pause active" aria-hidden="true"></i>
+                              <i className="fa fa-step-forward" aria-hidden="true"></i>
+                            </div>
 
                             <audio id="audio" onEnded={this.endProgress} src={`http://localhost:4101/${record.blob_str}`} style={{"display":"none"}}>
 
@@ -87,11 +91,14 @@ class Docs extends Component {
                                 Your Browser doesn't support this HTML Tag
 
                             </audio>
-                            <div style={{"width":"80%", "margin":"0 auto"}}>{this.state.listItems}</div>
+                            <div style={{"width":"calc(100% - 160px)", "margin-left":"103px","line-height":"0","margin-top": "13px"}}>{this.state.listItems}</div>
                             <div className="progressBar">
                                 <div className="progress" style={{"width":this.state.percent+'%'}}></div>
+                                <small>21:40/33:32</small>
                             </div>
-
+                            <div className="download-icon">
+                              <i class="fa fa-download" aria-hidden="true"></i>
+                            </div>
 
                         </div>
 
