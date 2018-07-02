@@ -3,7 +3,7 @@ const mongoose          =   require('mongoose')
 
 /**      Interview Schema
  ---------------------------------*/
-var UserSubscriptionSchema = new Schema({
+const UserSubscriptionSchema = new Schema({
 
     chargebee_customer_id: { type: String, required: true },
 
@@ -15,7 +15,7 @@ var UserSubscriptionSchema = new Schema({
 
     //datetime: { created_at: { type: Date, default: Date.now }, updated_at: { type: Date, default: Date.now } }
 
-}, { timestamps: { createdAt : "created_at",  updatedAt : "updated_at" } }, { collection: 'user_subscriptions' } );
+}, { timestamps: { createdAt : "created_at",  updatedAt : "updated_at" } }, { collection_name: 'user_subscriptions' } );
 
 /**      User Models
  ---------------------------------*/
@@ -39,4 +39,4 @@ UserSubscriptionSchema.pre('save', function (next) {
 
 
 
-module.exports = mongoose.model('UserSubscription', UserSubscriptionSchema);
+module.exports = mongoose.model('UserSubscription', UserSubscriptionSchema, 'user_subscriptions');

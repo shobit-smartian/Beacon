@@ -78,7 +78,7 @@ exports.startLiveRec = function(req,res) {
 		})
 
 
-}
+};
 
 
 exports.uploadAudio = function(req,res,next){
@@ -103,7 +103,7 @@ exports.uploadAudio = function(req,res,next){
 					user_id: req.params.user,
 					transcript_duration : req.body.length
 				});
-				transObj.save(function(err, resp) {
+				/*transObj.save(function(err, resp) {
 						// Transcript.update({_id : resp._id },{$set : { transcript_duration : req.body.length}}).exec(function(error1,update){
 						// 	if(!err){
 						// 		console.log("update",update);
@@ -263,7 +263,7 @@ exports.uploadAudio = function(req,res,next){
 							}; //oneve
 						} //if
 					}
-				});
+				});*/
                 res.status(200).json({success: true, message: "Successfully uploaded", data: result});
             }
         })

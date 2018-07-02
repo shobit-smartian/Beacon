@@ -36,20 +36,22 @@ class Docs extends Component {
 
         if (nextProps !== props) {
 
-            this.state.record = nextProps.record
-            let last=0;
+            this.state.record = nextProps.record;
+            let last = 0;
             this.state.listItems = nextProps.record.markers.map((number,index) => {
+
                     let timeArr = number.timeConstraint.split(':');
-                    let secs=parseInt(timeArr[0]*60)+parseInt(timeArr[1]);
-                    let prog=(secs/nextProps.record.media_length)*100;
-                    if(index>0){
+                    let secs = parseInt(timeArr[0]*60) + parseInt(timeArr[1]);
+                    let prog = (secs/nextProps.record.media_length)*100;
+
+                    if(index > 0){
                         let lastTimeArr = nextProps.record.markers[index-1].timeConstraint.split(":");
                         let lastSecs=(lastTimeArr[0]*60)+lastTimeArr[1];
                         let lastProg=(lastSecs/nextProps.record.media_length)*100;
                         prog=prog-lastProg;    
                     }
                     
-                    return <span style={{"margin-left":prog+"%"}} onClick={this.skipPlay(secs)}>|</span>;
+                    return <span className='bubble' style={{marginLeft: prog+"%"}} onClick={this.skipPlay(secs)}>|</span>;
                 }
             );
             this.setState(...this.state);
@@ -87,11 +89,15 @@ class Docs extends Component {
                                 Your Browser doesn't support this HTML Tag
 
                             </audio>
-                            <div style={{"width":"80%", "margin":"0 auto"}}>{this.state.listItems}</div>
-                            <div className="progressBar">
-                                <div className="progress" style={{"width":this.state.percent+'%'}}></div>
-                            </div>
 
+                            <div style={{"width":"80%", "margin":"0 auto"}}>{this.state.listItems}</div>
+
+
+                            <div className="progressBar">
+
+                                <div className="progress" style={{"width":this.state.percent+'%'}}> </div>
+
+                            </div>
 
                         </div>
 
