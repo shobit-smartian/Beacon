@@ -106,8 +106,14 @@ body {
     font-size: 35px;
     font-weight: 400;
   }
-  form input {
+  form input, form select {
     border: 1px solid #eff0f3;
+  }
+  form select>option{
+    font-size: 14px;
+  }
+  select>option[selected="selected"]{
+    font-size: 14px;
   }
   .input-group > input {
     border-right: 1px solid #fff;
@@ -134,6 +140,17 @@ body {
   }
   .error-msg {
     color: tomato;
+  }
+  .welcome-bottom-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div.skip{
+      margin-top: 27px;
+      margin-right: 11px;
+      color: #b1b5bb;
+      }
+        
   }
 }
 
