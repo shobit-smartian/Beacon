@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getRecord} from "../actions/records";
 
+import {environment as env} from "../conf/environment";
+
 
 // css dependencies
 import './_styles/docs.scss';
@@ -59,7 +61,6 @@ class Docs extends Component {
                 }
             );
             this.setState(...this.state);
-            console.log("this.state",this.state)
         }
     }
 
@@ -93,13 +94,13 @@ class Docs extends Component {
 
                         <div className="player">
 
-                            <div onClick={this.playPauseSong} style={{float: "left"}} className="play-icons">
+                            <div style={{float: "left"}} className="play-icons">
                                 <i className="fa fa-step-backward" aria-hidden="true"> </i>
-                                <i className={`fa fa-${isPaused ? 'play' : 'pause'} active`} aria-hidden="true"> </i>
+                                <i onClick={this.playPauseSong} className={`fa fa-${isPaused ? 'play' : 'pause'} active`} aria-hidden="true"> </i>
                                 <i className="fa fa-step-forward" aria-hidden="true"> </i>
                             </div>
 
-                            <audio id="audio" onEnded={this.endProgress} src={`http://localhost:4101/${record.blob_str}`} style={{display: "none"}}>
+                            <audio id="audio" onEnded={this.endProgress} src={`${ env.API_ROOT + record.blob_str}`} style={{display: "none"}}>
 
                                 <source type="audio/wav"/>
 
@@ -118,11 +119,11 @@ class Docs extends Component {
 
                             </div>
 
-                            <div className="download-icon">
+                            <a href={`${ env.API_ROOT + record.blob_str}`} download className="download-icon">
 
                                 <i className="fa fa-download" aria-hidden="true"> </i>
 
-                            </div>
+                            </a>
 
                         </div>
 
@@ -239,7 +240,7 @@ class Docs extends Component {
             if(this.state.percent>=100){
                 this.state.percent=0;
                 this.state.sec=0;
-                this.state.isPaused=0
+                this.state.isPaused=0;
                 this.setState({...this.state});
             }
             document.getElementById("audio").play();
@@ -254,7 +255,7 @@ class Docs extends Component {
         clearInterval(this.state.interval);
         this.state.sec=0;
         this.state.interval=0;
-        // this.state.percent=0;
+        this.state.percent=100;
         this.state.playing=0;
         this.state.isPaused=1;
         this.setState({...this.state});
@@ -272,12 +273,12 @@ class Docs extends Component {
             this.state.percent=((this.state.sec/this.state.record.media_length)*100);
             this.setState({...this.state});
         }
-    }
+    };
 
     skipPlay = data => () => {
 
 
-        this.state.sec = data;
+        this.state.sec = data-1;
         this.state.percent=((this.state.sec/this.state.record.media_length)*100);
         document.getElementById("audio").currentTime = data;
         document.getElementById("audio").play();

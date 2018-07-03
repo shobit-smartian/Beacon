@@ -1,9 +1,5 @@
-import {
-    callApi,
-    setIdToken,
-    removeIdToken,
-} from "../utils/apiUtils";
-
+import { callApi, setIdToken, removeIdToken} from "../utils/apiUtils";
+import {environment as env} from '../conf/environment'
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -12,6 +8,7 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
+
 
 
 const headerObj = {
@@ -32,18 +29,18 @@ export function login(user, password) {
     };
 
     return callApi(
-        "user/login",
+        `${env.API_ROOT}user/login`,
         config,
-        (user) => {
-            return {type: LOGIN_REQUEST, user}
+        () => {
+            return {type: LOGIN_REQUEST}
         },
         (payload) => {
             setIdToken(payload.data.token);
-            return {type: LOGIN_SUCCESS, user: {email: payload.data.email, name: payload.data.name}}
+            return {type: LOGIN_SUCCESS, payload: payload}
         },
         (error) => {
             removeIdToken();
-            return {type: LOGIN_FAILURE, error}
+            return {type: LOGIN_FAILURE, error: error}
         }
     );
 }
@@ -54,7 +51,7 @@ export function login(user, password) {
 
 export function register(user, plan) {
 
-    let apiUrl = `user/register`;
+    let apiUrl = `${env.API_ROOT}user/register`;
 
     return callApi(
         apiUrl,
@@ -70,7 +67,7 @@ export function register(user, plan) {
             return { type: REGISTER_SUCCESS, payload: payload };
         },
         error => {
-            return { type: REGISTER_FAILURE, error };
+            return { type: REGISTER_FAILURE, payload: error };
         }
     );
 }

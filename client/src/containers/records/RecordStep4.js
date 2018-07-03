@@ -50,6 +50,7 @@ class RecordStep4 extends Component {
     componentWillReceiveProps(props) {
 
         if (props.record.success) {
+            localStorage.removeItem('chipData');
             props.history.push(`/docs/${props.record.data._id}`)
         }
     }

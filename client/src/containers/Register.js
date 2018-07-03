@@ -179,16 +179,16 @@ class Register extends Component {
                                     <div className="error-msg ">
 
                                         <i className="material-icons">clear</i>
-                                        <span> Please provide valid input. </span>
+                                        <span> Please enter required fields. </span>
 
                                     </div>
                                 }
 
-                                <div className="success-msg ">
+                                {/*<div className="success-msg ">
 
                                     <i className="material-icons">done</i> <span> You're all set. Sign in with your new password below. </span>
 
-                                </div>
+                                </div>*/}
 
 
                                 <label>Get started with Beacon</label>
@@ -299,7 +299,7 @@ class Register extends Component {
             password_visibility: !this.state.password_visibility
         });
         this.refs.password.setAttribute('type', (!this.state.password_visibility ? `text` : `password`))
-    }
+    };
 
 
     passDataToPaymentSection = (evt) => {
@@ -334,8 +334,6 @@ Register.propTypes = {
 };
 
 function mapStateToProps(state) {
-
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxx', state, state.auth)
 
     const {auth} = state;
 

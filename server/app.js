@@ -74,7 +74,7 @@ app.set('view engine', 'jade');
 
 const corsOptions = {
     // 'origin': 'https://stagingsdei.com',
-    'origin': 'http://localhost:3000',
+    'origin': '*',
     'methods': ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTION'],
     'credentials': true,
     'exposedHeaders': ['Cache-Control', 'Content-Encoding', 'Content-Range'],

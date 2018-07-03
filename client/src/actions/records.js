@@ -1,6 +1,7 @@
 import {
     callApi, decodeUserProfile, loadIdToken
 } from "../utils/apiUtils";
+import {environment as env} from "../conf/environment";
 
 
 export const SAVE_RECORD_REQUEST = "SAVE_RECORD_REQUEST";
@@ -15,7 +16,7 @@ export const GET_RECORD_FAILURE = "GET_RECORD_FAILURE";
 
 export function saveRecord(payload) {
 
-    const apiUrl = `/transcriptions/uploadInterview/${decodeUserProfile(loadIdToken())._id}`;
+    const apiUrl = `${env.API_ROOT}transcriptions/uploadInterview/${decodeUserProfile(loadIdToken())._id}`;
 
     const config = {
         method: "post",
@@ -47,7 +48,7 @@ export function getRecord(interview_id) {
     };
 
     return callApi(
-        `/transcriptions/getInterview/${interview_id}`,
+        `${env.API_ROOT}transcriptions/getInterview/${interview_id}`,
         config,
         () => { return { type: GET_RECORD_REQUEST } },
         (response) => { return { type: GET_RECORD_SUCCESS, payload: response.data } },

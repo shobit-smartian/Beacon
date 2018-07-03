@@ -30,8 +30,6 @@ exports.login = function (req, res, next) {
 
     if (req.body.email && req.body.password) {
 
-        console.log({email: req.body.email, password: req.body.password})
-
         User.findOne({email: req.body.email, password: req.body.password}).exec(function (err, user) {
             if (err) {
                 res.status(401).jsonp({success: false, message: "There is an internal server error", err: err});
@@ -50,6 +48,8 @@ exports.login = function (req, res, next) {
 
 exports.register = function (req, res, next) {
 
+    console.log(req.body.plan_type)
+
 
     if (req.body.email && req.body.password && req.body.name) {
         User.findOne({email: req.body.email}).exec(function (err, user) {
@@ -57,7 +57,7 @@ exports.register = function (req, res, next) {
                 res.status(401).jsonp({"msg": err});
             } else {
                 if (user) {
-                    res.status(401).jsonp({"msg": "Email already exists!"});
+                    return res.status(401).jsonp({success: false, message: "This user is already exist"});
                 } else {
 
                     async.waterfall([
@@ -65,11 +65,7 @@ exports.register = function (req, res, next) {
                         // saving user data
                         function (callback) {
 
-                            User({
-                                name: req.body.name,
-                                email: req.body.email,
-                                password: req.body.password
-                            }).save(function (err, user) {
+                            User({ name: req.body.name, email: req.body.email, password: req.body.password }).save(function (err, user) {
                                 if (err)
                                     return callback(err, false);
 
@@ -95,7 +91,7 @@ exports.register = function (req, res, next) {
                                             if (err)
                                                 return callback(err, false);
 
-                                            chargeBeeCallback(false, chargeBeeCustomer)
+                                            return chargeBeeCallback(false, chargeBeeCustomer)
                                         });
                                 },
                                 function (response, chargeBeeCallback) {
@@ -158,11 +154,13 @@ exports.register = function (req, res, next) {
                         }
                     ], function (err, result) {
 
+                        console.log(err)
+
                         if (err) {
-                            return res.status(400).jsonp({ status: false, message: "There is an internal server error", err: err });
+                            return res.status(500).jsonp({ success: false, message: "There is an internal server error", err: err });
                         }
 
-                        return res.status(200).jsonp({ status: true, message: "User has been registered successfully", data: result });
+                        return res.status(200).jsonp({ success: true, message: "User has been registered successfully", data: result });
                     });
 
                 }
@@ -170,7 +168,7 @@ exports.register = function (req, res, next) {
         })
     } else {
 
-        return res.status(401).jsonp({status: false, message: "Inputs name and email are required"});
+        return res.status(401).jsonp({success: false, message: "Inputs name and email are required"});
     }
 }
 
@@ -202,9 +200,9 @@ exports.update = function (user, socketId) {
     User.findOne({_id: user._id}).exec(function (err, user) {
         if (!err) {
             if (user.socketId) {
-                if (typeof user.socketId == 'object') {
+                if (typeof user.socketId === 'object') {
                     user.socketId.push(socketId);
-                } else if (typeof user.socketId == 'string') {
+                } else if (typeof user.socketId === 'string') {
                     delete user.socketId;
                     user.socketId = [];
                     user.socketId.push(socketId);

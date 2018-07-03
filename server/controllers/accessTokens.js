@@ -14,7 +14,7 @@ exports.getToken = function(req, res, next){
 	user.email=req.user.email;
 	user.image = req.user.image;
 	user._id=req.user._id;
-	res.status(200).jsonp({"data":user,"msg":""});
+	res.status(200).jsonp({success: true, data: user, messsage: "User has been authenticated successfully"});
 }
 
 exports.getUser = function(req, res, next){	

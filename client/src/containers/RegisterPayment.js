@@ -36,11 +36,11 @@ class RegisterPayment extends Component {
 
     componentWillReceiveProps(nextProps, props) {
 
-        if (nextProps.response.status) {
+        if (!nextProps.registerError) {
             return this.props.history.push('/login')
         }
         this.setState({
-            ...this.state, ...{validateErr: nextProps.response.message}
+            ...this.state, ...{validateErr: nextProps.message}
         })
     }
 
@@ -94,7 +94,7 @@ class RegisterPayment extends Component {
 
                                              <Switch
                                                  onChange={this.changeBillingPlan}
-                                                 color={'black'}
+                                                 color={'primary'}
                                              />
 
                                           </span>
@@ -179,7 +179,7 @@ class RegisterPayment extends Component {
 
                                         <i className="material-icons">clear</i>
 
-                                        <span> Please enter valid input. </span>
+                                        <span> {validateErr} </span>
 
                                     </div>
                                 }
@@ -340,9 +340,9 @@ RegisterPayment.propTypes = {
 
 function mapStateToProps(state) {
 
-    console.log(state)
-
     const {auth} = state;
+
+    console.log(auth)
 
     if (auth) {
         return auth;

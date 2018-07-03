@@ -20,7 +20,8 @@ class Login extends Component {
         this.handleLogin = this.handleLogin.bind(this);
 
         this.state = {
-            password_visibility: false
+            password_visibility: false,
+            validationErr: null
         }
     }
 
@@ -33,7 +34,9 @@ class Login extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        if (nextProps.user) {
+        console.log('-------', nextProps)
+
+        if (nextProps.user && !nextProps.loginError) {
             // logged in, let's show redirect if any, or show home
             try {
                 const {from} = this.props.location.state || {
@@ -44,6 +47,11 @@ class Login extends Component {
                 nextProps.history.replace("/");
             }
         }
+
+        this.setState({
+            ...this.state,
+            ...{ validationErr: nextProps.message }
+        })
     }
 
 
@@ -106,7 +114,7 @@ class Login extends Component {
 
                                     <div className="error-msg ">
 
-                                        <i className="material-icons">clear</i> <span> Please provide valid input. </span>
+                                        <i className="material-icons">clear</i> <span> {this.state.validationErr}. </span>
 
                                     </div>
                                 }
@@ -222,7 +230,7 @@ class Login extends Component {
     handleLogin = (event) => {
         event.preventDefault();
         this.props.dispatch(
-            login(this.refs.username.value, this.refs.password.value)
+            login( this.refs.username.value, this.refs.password.value )
         );
         this.refs.username.value = this.refs.password.value = ``;
     };

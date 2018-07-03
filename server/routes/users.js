@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var user = require('../controllers/users')
-var token = require('../controllers/accessTokens')
+const express = require('express');
+const router = express.Router();
+const user = require('../controllers/users');
+const token = require('../controllers/accessTokens');
 
 
 
