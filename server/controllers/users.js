@@ -48,8 +48,6 @@ exports.login = function (req, res, next) {
 
 exports.register = function (req, res, next) {
 
-    console.log(req.body.plan_type)
-
 
     if (req.body.email && req.body.password && req.body.name) {
         User.findOne({email: req.body.email}).exec(function (err, user) {

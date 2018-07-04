@@ -24,6 +24,7 @@ function initializeState() {
 }
 
 export default function auth(state = initializeState(), action = {}) {
+
     console.log(action.type)
 
     switch (action.type) {

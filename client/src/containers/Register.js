@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {register} from "../actions/auth";
 
 
-import eye from '../assets/images/eye-icon.png';
 import lock from '../assets/images/lock.png';
 import sale from '../assets/images/sale-banner.png';
 
@@ -156,7 +155,6 @@ class Register extends Component {
 
                             </div>
 
-
                         </div>
 
                     </div>
@@ -183,12 +181,6 @@ class Register extends Component {
 
                                     </div>
                                 }
-
-                                {/*<div className="success-msg ">
-
-                                    <i className="material-icons">done</i> <span> You're all set. Sign in with your new password below. </span>
-
-                                </div>*/}
 
 
                                 <label>Get started with Beacon</label>
